@@ -1,0 +1,23 @@
+{
+    "name": "react-cloudflare-turnstile",
+    "version": "1.0.0",
+    "description": "Simple react wrapper for the Cloudflare Turnstile",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/KevinAshley/react-cloudflare-turnstile.git"
+    },
+    "keywords": [
+        "cloudflare",
+        "turnstile"
+    ],
+    "author": "KevinAshley",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/KevinAshley/react-cloudflare-turnstile/issues"
+    },
+    "homepage": "https://github.com/KevinAshley/react-cloudflare-turnstile#readme"
+}
