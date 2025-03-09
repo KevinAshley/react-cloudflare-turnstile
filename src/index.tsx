@@ -8,22 +8,13 @@ declare global {
 
 export default function ReactCloudflareTurnstile({
     turnstileSiteKey,
-    value,
-    setValue,
+    callback,
     theme,
-    hiddenInput,
     size = "normal",
 }: {
     turnstileSiteKey: string;
-    value: string;
-    setValue: (param: string) => void;
+    callback: (token: string) => void;
     theme: "auto" | "light" | "dark";
-    hiddenInput?: {
-        name?: string;
-        id?: string;
-        className?: string;
-        required?: boolean;
-    };
     size?: "normal" | "flexible" | "compact";
 }) {
     const turnstileRef = useRef<HTMLDivElement>(null);
@@ -62,8 +53,12 @@ export default function ReactCloudflareTurnstile({
                     turnstileRef.current as HTMLElement,
                     {
                         sitekey: turnstileSiteKey,
-                        callback: function (token) {
-                            setValue(token);
+                        callback,
+                        "timeout-callback": () => {
+                            console.log("TESTING timeout-callback");
+                        },
+                        "error-callback": (error) => {
+                            console.log("TESTING error-callback", error);
                         },
                         theme,
                         size,
@@ -73,7 +68,7 @@ export default function ReactCloudflareTurnstile({
                 attemptingTurnstileRef.current = false;
             })();
         }
-    }, [mounted, theme, setValue, size]);
+    }, [mounted, theme, callback, size]);
 
     useEffect(() => {
         return () => {
@@ -89,36 +84,22 @@ export default function ReactCloudflareTurnstile({
                 return ["65px", "100%"];
             case "compact":
                 return ["140px", "150px"];
+            case "normal":
             default:
                 return ["65px", "300px"];
         }
     }, [size]);
 
     return (
-        <div>
+        <Fragment>
             <div
+                ref={turnstileRef}
+                className={"react-cloudflare-turnstile"}
                 style={{
                     height,
                     width,
                 }}
-            >
-                <div
-                    ref={turnstileRef}
-                    className={"react-cloudflare-turnstile"}
-                />
-            </div>
-            {!!hiddenInput && (
-                <input
-                    name={hiddenInput.name}
-                    id={hiddenInput.id}
-                    className={hiddenInput.className}
-                    required={hiddenInput.required}
-                    ///
-                    value={value}
-                    onChange={() => {}}
-                    style={{ display: "none" }}
-                />
-            )}
-        </div>
+            />
+        </Fragment>
     );
 }
