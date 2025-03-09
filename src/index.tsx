@@ -40,14 +40,18 @@ export default function ReactCloudflareTurnstile({
     }, []);
 
     useEffect(() => {
-        const script = document.createElement("script");
-        script.src = `https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit`;
-        script.async = true;
-        document.head.appendChild(script);
-        return () => {
-            // remove the script when component un-mounts
-            document.head.removeChild(script);
-        };
+        if (!window.turnstile) {
+            // only add the script if it has not already loaded
+            console.log("Loading the Cloudflare Turnstile script");
+            const script = document.createElement("script");
+            script.src = `https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit`;
+            script.async = true;
+            document.head.appendChild(script);
+            return () => {
+                // remove the script when component un-mounts
+                document.head.removeChild(script);
+            };
+        }
     }, []);
 
     const resetTheTurnstile = () => {
