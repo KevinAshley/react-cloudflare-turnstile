@@ -1,5 +1,5 @@
 function test(): string {
-    return "Hello World";
+    return "Hello World!";
 }
 
 export default test;
