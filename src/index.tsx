@@ -15,6 +15,14 @@ export default function ReactCloudflareTurnstile({
     execution,
     action,
     cData,
+    language,
+    tabIndex,
+    responseField,
+    responseFieldName,
+    retry,
+    retryInterval,
+    refreshExpired,
+    refreshTimeout,
     expiredCallback,
     errorCallback,
     beforeInteractiveCallback,
@@ -29,6 +37,14 @@ export default function ReactCloudflareTurnstile({
     execution?: "execute" | "render";
     action?: string;
     cData?: string;
+    language?: string;
+    tabIndex?: number;
+    responseField?: boolean;
+    responseFieldName?: string;
+    retry?: "auto" | "never";
+    retryInterval?: number;
+    refreshExpired?: "auto" | "manual" | "never";
+    refreshTimeout?: "auto" | "manual" | "never";
     expiredCallback?: (token: string) => void;
     errorCallback?: (error: string) => void;
     beforeInteractiveCallback?: () => void;
@@ -99,6 +115,14 @@ export default function ReactCloudflareTurnstile({
                         execution,
                         action,
                         cData,
+                        language,
+                        tabindex: tabIndex,
+                        "response-field": responseField,
+                        "response-field-name": responseFieldName,
+                        retry,
+                        "retry-interval": retryInterval,
+                        "refresh-expired": refreshExpired,
+                        "refresh-timeout": refreshTimeout,
                         "expired-callback":
                             expiredCallback || expiredCallbackFallback,
                         "error-callback":

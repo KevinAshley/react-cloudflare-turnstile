@@ -17,7 +17,7 @@ function MyComponent() {
     // ...
     return (
         <Turnstile
-            turnstileSiteKey="YOUR_CLOUDFLARE_TURNSTILE_SITE_KEY"
+            turnstileSiteKey={"YOUR_CLOUDFLARE_TURNSTILE_SITE_KEY"}
             callback={(token) => {
                 // save the token, validate it server-side
             }}
@@ -38,23 +38,38 @@ function MyComponent() {
     // ...
     return (
         <Turnstile
-            turnstileSiteKey="YOUR_CLOUDFLARE_TURNSTILE_SITE_KEY"
+            turnstileSiteKey={"YOUR_CLOUDFLARE_TURNSTILE_SITE_KEY"}
             callback={(token) => {
                 // save the token, validate it server-side
             }}
-            theme="auto" // "auto" | "light" | "dark"
-            size="normal" // "normal" | "flexible" | "compact"
+            // =====================================
+            // ADVANCED USAGE PROPS BELOW (OPTIONAL)
+            // =====================================
+            theme={"dark"} // ("auto" | "light" | "dark")
+            size={"flexible"} // ("normal" | "flexible" | "compact")
+            execution={"execute"} // ("execute" | "render")
+            action={"WIDGET_IDENTIFIER"} // (string)
+            cData={"CUSTOMER_DATA"} // (string)
+            language={"en-US"} // (string)
+            tabIndex={1} // (number)
+            responseField={false} // (boolean)
+            responseFieldName={"cf-turnstile-response"} // (string)
+            retry={"never"} // "auto" | "never"
+            retryInterval={10000} // number
+            refreshExpired={"never"} // "auto" | "manual" | "never"
+            refreshTimeout={"never"} // "auto" | "manual" | "never"
             beforeInteractiveCallback={() => {
-                // (OPTIONAL) no default callback is set
+                // ...
             }}
             afterInteractiveCallback={() => {
-                // (OPTIONAL) no default callback is set
+                // ...
             }}
             unsupportedCallback={() => {
-                // (OPTIONAL) no default callback is set
+                // ...
             }}
             expiredCallback={(token: string) => {
-                // (OPTIONAL) if no callback is passed,
+                // ...
+                // NOTE: if no callback is passed,
                 // we set a "fallback" expiredCallback
                 // as a convenience that...
                 // 1.) Executes your callback with an
@@ -62,7 +77,8 @@ function MyComponent() {
                 // 2.) Resets the Turnstile
             }}
             errorCallback={() => {
-                // (OPTIONAL) if no callback is passed,
+                // ...
+                // NOTE: if no callback is passed,
                 // we set a "fallback" errorCallback
                 // as a convenience that...
                 // 1.) Executes your callback with an
