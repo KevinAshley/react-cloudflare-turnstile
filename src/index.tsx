@@ -9,13 +9,25 @@ declare global {
 export default function ReactCloudflareTurnstile({
     turnstileSiteKey,
     callback,
+    // optional params below
     theme = "auto",
     size = "normal",
+    expiredCallback,
+    beforeInteractiveCallback,
+    afterInteractiveCallback,
+    unsupportedCallback,
+    errorCallback,
 }: {
     turnstileSiteKey: string;
     callback: (token: string) => void;
+    // optional params below
     theme?: "auto" | "light" | "dark";
     size?: "normal" | "flexible" | "compact";
+    expiredCallback?: (token: string) => void;
+    beforeInteractiveCallback?: () => void;
+    afterInteractiveCallback?: () => void;
+    unsupportedCallback?: () => void;
+    errorCallback?: (error: string) => void;
 }) {
     const turnstileRef = useRef<HTMLDivElement>(null);
     const [mounted, setMounted] = useState(false);
@@ -38,6 +50,13 @@ export default function ReactCloudflareTurnstile({
         };
     }, []);
 
+    const resetTheTurnstile = () => {
+        console.log("Resetting the Turnstile");
+        if (!!window?.turnstile?.reset && turnstileIdRef.current) {
+            window.turnstile.reset(turnstileIdRef.current);
+        }
+    };
+
     useEffect(() => {
         if (
             mounted &&
@@ -54,12 +73,13 @@ export default function ReactCloudflareTurnstile({
                     {
                         sitekey: turnstileSiteKey,
                         callback,
-                        "timeout-callback": () => {
-                            console.log("TESTING timeout-callback");
-                        },
-                        "error-callback": (error) => {
-                            console.log("TESTING error-callback", error);
-                        },
+                        "expired-callback":
+                            expiredCallback || resetTheTurnstile,
+                        "before-interactive-callback":
+                            beforeInteractiveCallback,
+                        "after-interactive-callback": afterInteractiveCallback,
+                        "unsupported-callback": unsupportedCallback,
+                        "error-callback": errorCallback,
                         theme,
                         size,
                     }
