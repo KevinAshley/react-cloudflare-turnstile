@@ -64,7 +64,6 @@ export default function Turnstile({
     useEffect(() => {
         if (!window.turnstile) {
             // only add the script if it has not already loaded
-            console.log("Loading the Cloudflare Turnstile script");
             const script = document.createElement("script");
             script.src = `https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit`;
             script.async = true;
@@ -77,7 +76,6 @@ export default function Turnstile({
     }, []);
 
     const resetTheTurnstile = () => {
-        console.log("Resetting the Turnstile");
         if (!!window?.turnstile?.reset && turnstileIdRef.current) {
             window.turnstile.reset(turnstileIdRef.current);
         }
