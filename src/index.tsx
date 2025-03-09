@@ -28,11 +28,13 @@ export default function ReactCloudflareTurnstile({
     }, []);
 
     useEffect(() => {
-        const script = document.createElement("script");
-        script.src = `https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit`;
-        script.async = true;
-        document.head.appendChild(script);
-    }, []);
+        if (mounted) {
+            const script = document.createElement("script");
+            script.src = `https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit`;
+            script.async = true;
+            document.head.appendChild(script);
+        }
+    }, [mounted]);
 
     useEffect(() => {
         if (
