@@ -6,7 +6,7 @@ declare global {
     }
 }
 
-export default function ReactCloudflareTurnstile({
+export default function Turnstile({
     turnstileSiteKey,
     callback,
     // optional params below
