@@ -45,19 +45,19 @@ function MyComponent() {
             // =====================================
             // ADVANCED USAGE PROPS BELOW (OPTIONAL)
             // =====================================
-            theme={"dark"} // ("auto" | "light" | "dark")
-            size={"flexible"} // ("normal" | "flexible" | "compact")
-            execution={"execute"} // ("execute" | "render")
+            theme={"auto"} // ("auto" | "light" | "dark")
+            size={"normal"} // ("normal" | "flexible" | "compact")
+            execution={"render"} // ("execute" | "render")
             action={"WIDGET_IDENTIFIER"} // (string)
             cData={"CUSTOMER_DATA"} // (string)
-            language={"en-US"} // (string)
-            tabIndex={1} // (number)
-            responseField={false} // (boolean)
+            language={"auto"} // ("auto" | "en-US" | ...)
+            tabIndex={0} // (number)
+            responseField={true} // (boolean)
             responseFieldName={"cf-turnstile-response"} // (string)
-            retry={"never"} // "auto" | "never"
-            retryInterval={10000} // number
-            refreshExpired={"never"} // "auto" | "manual" | "never"
-            refreshTimeout={"never"} // "auto" | "manual" | "never"
+            retry={"auto"} // ("auto" | "never")
+            retryInterval={8000} // (number)
+            refreshExpired={"auto"} // ("auto" | "manual" | "never")
+            refreshTimeout={"auto"} // ("auto" | "manual" | "never")
             beforeInteractiveCallback={() => {
                 // ...
             }}
