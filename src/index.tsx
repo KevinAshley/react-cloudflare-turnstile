@@ -88,12 +88,6 @@ export default function ReactCloudflareTurnstile({
         resetTheTurnstile();
     };
 
-    const errorCallbackFallback = (error: string) => {
-        console.log("Cloudflare Turnstile Error: ", error);
-        callback("");
-        resetTheTurnstile();
-    };
-
     useEffect(() => {
         if (
             mounted &&
@@ -125,8 +119,7 @@ export default function ReactCloudflareTurnstile({
                         "refresh-timeout": refreshTimeout,
                         "expired-callback":
                             expiredCallback || expiredCallbackFallback,
-                        "error-callback":
-                            errorCallback || errorCallbackFallback,
+                        "error-callback": errorCallback,
                         "before-interactive-callback":
                             beforeInteractiveCallback,
                         "after-interactive-callback": afterInteractiveCallback,

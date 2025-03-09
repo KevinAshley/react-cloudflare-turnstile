@@ -67,7 +67,10 @@ function MyComponent() {
             unsupportedCallback={() => {
                 // ...
             }}
-            expiredCallback={(token: string) => {
+            errorCallback={(error) => {
+                // ...
+            }}
+            expiredCallback={(token) => {
                 // ...
                 // NOTE: if no callback is passed,
                 // we set a "fallback" expiredCallback
@@ -75,16 +78,6 @@ function MyComponent() {
                 // 1.) Executes your callback with an
                 //     empty string token
                 // 2.) Resets the Turnstile
-            }}
-            errorCallback={() => {
-                // ...
-                // NOTE: if no callback is passed,
-                // we set a "fallback" errorCallback
-                // as a convenience that...
-                // 1.) Executes your callback with an
-                //     empty string token
-                // 2.) Resets the Turnstile
-                // 3.) Logs the error to the console
             }}
         />
     );
