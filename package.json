@@ -1,6 +1,6 @@
 {
     "name": "react-cloudflare-turnstile",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Simple react wrapper for the Cloudflare Turnstile",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
