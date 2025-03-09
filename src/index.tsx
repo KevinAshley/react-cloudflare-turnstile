@@ -10,24 +10,30 @@ export default function ReactCloudflareTurnstile({
     turnstileSiteKey,
     callback,
     // optional params below
-    theme = "auto",
-    size = "normal",
+    theme,
+    size,
+    execution,
+    action,
+    cData,
     expiredCallback,
+    errorCallback,
     beforeInteractiveCallback,
     afterInteractiveCallback,
     unsupportedCallback,
-    errorCallback,
 }: {
     turnstileSiteKey: string;
     callback: (token: string) => void;
     // optional params below
     theme?: "auto" | "light" | "dark";
     size?: "normal" | "flexible" | "compact";
+    execution?: "execute" | "render";
+    action?: string;
+    cData?: string;
     expiredCallback?: (token: string) => void;
+    errorCallback?: (error: string) => void;
     beforeInteractiveCallback?: () => void;
     afterInteractiveCallback?: () => void;
     unsupportedCallback?: () => void;
-    errorCallback?: (error: string) => void;
 }) {
     const turnstileRef = useRef<HTMLDivElement>(null);
     const [mounted, setMounted] = useState(false);
@@ -61,6 +67,17 @@ export default function ReactCloudflareTurnstile({
         }
     };
 
+    const expiredCallbackFallback = () => {
+        callback("");
+        resetTheTurnstile();
+    };
+
+    const errorCallbackFallback = (error: string) => {
+        console.log("Cloudflare Turnstile Error: ", error);
+        callback("");
+        resetTheTurnstile();
+    };
+
     useEffect(() => {
         if (
             mounted &&
@@ -77,15 +94,19 @@ export default function ReactCloudflareTurnstile({
                     {
                         sitekey: turnstileSiteKey,
                         callback,
+                        theme,
+                        size,
+                        execution,
+                        action,
+                        cData,
                         "expired-callback":
-                            expiredCallback || resetTheTurnstile,
+                            expiredCallback || expiredCallbackFallback,
+                        "error-callback":
+                            errorCallback || errorCallbackFallback,
                         "before-interactive-callback":
                             beforeInteractiveCallback,
                         "after-interactive-callback": afterInteractiveCallback,
                         "unsupported-callback": unsupportedCallback,
-                        "error-callback": errorCallback,
-                        theme,
-                        size,
                     }
                 );
                 turnstileIdRef.current = renderedTurnstileId;
