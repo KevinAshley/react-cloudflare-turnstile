@@ -9,12 +9,12 @@ declare global {
 export default function ReactCloudflareTurnstile({
     turnstileSiteKey,
     callback,
-    theme,
+    theme = "auto",
     size = "normal",
 }: {
     turnstileSiteKey: string;
     callback: (token: string) => void;
-    theme: "auto" | "light" | "dark";
+    theme?: "auto" | "light" | "dark";
     size?: "normal" | "flexible" | "compact";
 }) {
     const turnstileRef = useRef<HTMLDivElement>(null);
