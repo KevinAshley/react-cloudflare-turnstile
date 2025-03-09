@@ -23,18 +23,20 @@ export default function ReactCloudflareTurnstile({
     const attemptingTurnstileRef = useRef(false);
 
     useEffect(() => {
-        // only render the turnstile after mounted is true...
+        // we only attempt to render the turnstile after mounted is true
         setMounted(true);
     }, []);
 
     useEffect(() => {
-        if (mounted) {
-            const script = document.createElement("script");
-            script.src = `https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit`;
-            script.async = true;
-            document.head.appendChild(script);
-        }
-    }, [mounted]);
+        const script = document.createElement("script");
+        script.src = `https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit`;
+        script.async = true;
+        document.head.appendChild(script);
+        return () => {
+            // remove the script when component un-mounts
+            document.head.removeChild(script);
+        };
+    }, []);
 
     useEffect(() => {
         if (
