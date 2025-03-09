@@ -11,11 +11,18 @@ export default function ReactCloudflareTurnstile({
     value,
     setValue,
     theme,
+    hiddenInput,
 }: {
     turnstileSiteKey: string;
     value: string;
     setValue: (param: string) => void;
     theme: "auto" | "light" | "dark";
+    hiddenInput?: {
+        name?: string;
+        id?: string;
+        className?: string;
+        required?: boolean;
+    };
 }) {
     const turnstileRef = useRef<HTMLDivElement>(null);
     const [mounted, setMounted] = useState(false);
@@ -74,14 +81,20 @@ export default function ReactCloudflareTurnstile({
     }, []);
 
     return (
-        <Fragment>
+        <div>
             <div ref={turnstileRef} className={"react-cloudflare-turnstile"} />
-            <input
-                className={"hidden-input"}
-                value={value}
-                onChange={() => {}}
-                required={true}
-            />
-        </Fragment>
+            {!!hiddenInput && (
+                <input
+                    name={hiddenInput.name}
+                    id={hiddenInput.id}
+                    className={hiddenInput.className}
+                    required={hiddenInput.required}
+                    ///
+                    value={value}
+                    onChange={() => {}}
+                    style={{ display: "none" }}
+                />
+            )}
+        </div>
     );
 }
