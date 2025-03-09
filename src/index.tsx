@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useMemo, useRef, useState } from "react";
 
 declare global {
     interface Window {
@@ -12,6 +12,7 @@ export default function ReactCloudflareTurnstile({
     setValue,
     theme,
     hiddenInput,
+    size = "normal",
 }: {
     turnstileSiteKey: string;
     value: string;
@@ -23,6 +24,7 @@ export default function ReactCloudflareTurnstile({
         className?: string;
         required?: boolean;
     };
+    size?: "normal" | "flexible" | "compact";
 }) {
     const turnstileRef = useRef<HTMLDivElement>(null);
     const [mounted, setMounted] = useState(false);
@@ -64,13 +66,14 @@ export default function ReactCloudflareTurnstile({
                             setValue(token);
                         },
                         theme,
+                        size,
                     }
                 );
                 turnstileIdRef.current = renderedTurnstileId;
                 attemptingTurnstileRef.current = false;
             })();
         }
-    }, [mounted, theme, setValue]);
+    }, [mounted, theme, setValue, size]);
 
     useEffect(() => {
         return () => {
@@ -80,9 +83,30 @@ export default function ReactCloudflareTurnstile({
         };
     }, []);
 
+    const [height, width] = useMemo(() => {
+        switch (size) {
+            case "flexible":
+                return ["65px", "100%"];
+            case "compact":
+                return ["140px", "150px"];
+            default:
+                return ["65px", "300px"];
+        }
+    }, [size]);
+
     return (
         <div>
-            <div ref={turnstileRef} className={"react-cloudflare-turnstile"} />
+            <div
+                style={{
+                    height,
+                    width,
+                }}
+            >
+                <div
+                    ref={turnstileRef}
+                    className={"react-cloudflare-turnstile"}
+                />
+            </div>
             {!!hiddenInput && (
                 <input
                     name={hiddenInput.name}
