@@ -1,6 +1,6 @@
 {
     "name": "react-cloudflare-turnstile",
-    "version": "1.1.3",
+    "version": "1.1.4",
     "description": "Simple react wrapper for the Cloudflare Turnstile",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -17,7 +17,7 @@
         "url": "git+https://github.com/KevinAshley/react-cloudflare-turnstile.git"
     },
     "publishConfig": {
-        "registry": "https://npm.pkg.github.com"
+        "registry": "https://registry.npmjs.org/"
     },
     "keywords": [
         "cloudflare",
