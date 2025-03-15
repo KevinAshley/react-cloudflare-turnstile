@@ -14,7 +14,10 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/KevinAshley/react-cloudflare-turnstile.git"
+        "url": "https://github.com/KevinAshley/react-cloudflare-turnstile.git"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com"
     },
     "keywords": [
         "cloudflare",
