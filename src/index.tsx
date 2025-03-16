@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 declare global {
     interface Window {
@@ -151,15 +151,13 @@ export default function Turnstile({
     }, [size]);
 
     return (
-        <Fragment>
-            <div
-                ref={turnstileRef}
-                className={"react-cloudflare-turnstile"}
-                style={{
-                    height,
-                    width,
-                }}
-            />
-        </Fragment>
+        <div
+            ref={turnstileRef}
+            className={"react-cloudflare-turnstile"}
+            style={{
+                height,
+                width,
+            }}
+        />
     );
 }

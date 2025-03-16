@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "target": "ES2019",
-        "jsx": "react",
+        "jsx": "react-jsx",
         "module": "commonjs",
         "rootDir": "./src",
         "moduleResolution": "node",
