@@ -1,3 +1,3 @@
 import Turnstile from "./Turnstile";
 
-module.exports = Turnstile;
+export default Turnstile;
