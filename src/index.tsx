@@ -1,3 +1,3 @@
-import Turnstile from "./Turnstile";
+import ReactCloudflareTurnstile from "./ReactCloudflareTurnstile";
 
-export default Turnstile;
+export default ReactCloudflareTurnstile;
