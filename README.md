@@ -10,6 +10,8 @@ npm i react-cloudflare-turnstile
 
 ## Basic Usage
 
+#### Client-Side (React)
+
 ```jsx
 import ReactCloudflareTurnstile from "react-cloudflare-turnstile";
 
@@ -26,7 +28,32 @@ function MyComponent() {
 }
 ```
 
+#### Server-Side (Node.js) \*
+
+```js
+import { verifyTurnstileToken } from "react-cloudflare-turnstile";
+
+function handleFormSubmission(values: FormValuesInterface) {
+    try {
+        const { token } = values;
+        await verifyTurnstileToken({
+            turnstileSecretKey: "YOUR_CLOUDFLARE_TURNSTILE_SECRET_KEY",
+            token,
+        });
+        // ...
+    } catch (error) {
+        // ...
+    }
+}
+```
+
+\* The _verifyTurnstileToken_ function is exported as a convenience for Node.js / Next.js servers.\
+ If you have a different back end, or simply prefer to write your own handler, the documentation is here:\
+ [https://developers.cloudflare.com/turnstile/get-started/server-side-validation/](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/)
+
 ## Advanced Usage
+
+#### Client-Side (React)
 
 Learn more about these Advanced Usage props here:\
 [https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/#configurations](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/#configurations)
