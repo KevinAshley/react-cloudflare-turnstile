@@ -11,12 +11,12 @@ npm i react-cloudflare-turnstile
 ## Basic Usage
 
 ```jsx
-import Turnstile from "react-cloudflare-turnstile";
+import ReactCloudflareTurnstile from "react-cloudflare-turnstile";
 
 function MyComponent() {
     // ...
     return (
-        <Turnstile
+        <ReactCloudflareTurnstile
             turnstileSiteKey={"YOUR_CLOUDFLARE_TURNSTILE_SITE_KEY"}
             callback={(token) => {
                 // save the token, validate it server-side
@@ -32,12 +32,12 @@ Learn more about these Advanced Usage props here:\
 [https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/#configurations](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/#configurations)
 
 ```jsx
-import Turnstile from "react-cloudflare-turnstile";
+import ReactCloudflareTurnstile from "react-cloudflare-turnstile";
 
 function MyComponent() {
     // ...
     return (
-        <Turnstile
+        <ReactCloudflareTurnstile
             turnstileSiteKey={"YOUR_CLOUDFLARE_TURNSTILE_SITE_KEY"}
             callback={(token) => {
                 // save the token, validate it server-side
